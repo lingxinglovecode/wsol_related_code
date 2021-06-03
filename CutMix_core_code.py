@@ -44,8 +44,8 @@ def rand_bbox(size,lam):
 if __name__ == '__main__':
 
     rand_bbox((1,3,224,224),0.2)
-    target = get_img_tensor('1.png').unsqueeze(0)
-    mix_img = get_img_tensor('2.png').unsqueeze(0)
+    target = get_img_tensor('data/1.png').unsqueeze(0)
+    mix_img = get_img_tensor('data/2.png').unsqueeze(0)
     mixed_img,_ = CutMix(target,mix_img)
     img = mixed_img.squeeze(0).numpy()
     img = np.transpose(img, (1, 2, 0))  # 把channel那一维放到最后

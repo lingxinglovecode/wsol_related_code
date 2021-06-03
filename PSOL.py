@@ -1,5 +1,9 @@
 from sklearn.decomposition import PCA
 import torch
+import torchvision.models as models
+import torchvision.transforms as transforms
+from ImageSet import ImageDataSet
+from torch.utils.data import Dataset,DataLoader
 #PSOL主要由两部分组成：1.生成伪目标框的算法 2.有监督训练的目标定位
 
 
@@ -35,6 +39,26 @@ class DDT:
         indicator_matrix = indicator_matrix.view(num,H,W)
 
 
+
+class Feature_extractor:
+    def __init__(self):
+        state_dict = torch.load("D://personal_file//code_test//pretrained_models//vgg19-dcbb9e9d.pth")
+        model = models.vgg19(pretrained=False)
+        model.load_state_dict(state_dict)
+        self.pretrained_model = model.features.cuda()
+
+    def extract(self,img_dir):
+
+        #img_process
+        dataset = ImageDataSet(img_dir)
+        dataloader = DataLoader(dataset,batch_size=1)
+
+        for batch_idx, images in enumerate(dataloader):
+            features = self.pretrained_model(images)
+
+
+feature_ex = Feature_extractor()
+feature_ex.extract('/Users/lianxing/Desktop/目前学习.nosync/wsol_related_code/data')
 
 
 

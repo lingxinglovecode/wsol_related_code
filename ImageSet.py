@@ -19,7 +19,7 @@ class ImageDataSet(Dataset):
         img_path = self.files[index % len(self.files)]
         img = Image.open(img_path).convert('RGB')
         img = self.transforms(img)
-        return img
+        return img.cuda()
     def __len__(self):
         return len(self.files)
 

@@ -8,7 +8,7 @@ import torch.optim as optim
 import numpy as np
 import utils
 #L2-CAF核心部分其实就是一个可学习的掩膜
-
+#https://github.com/ahmdtaha/l2_caf_pytorch
 def polynomial_lr_decay(global_step,
              init_learning_rate,
              max_iter,
